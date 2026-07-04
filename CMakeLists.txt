@@ -17,6 +17,7 @@ add_executable(gak src/css/test.cpp)
 
 target_sources(gak PRIVATE
     src/css/lexer.cpp
+    src/css/parser.cpp
 )
 
 # Link the required FTXUI libraries
