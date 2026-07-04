@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(gak CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Automatically download FTXUI from GitHub
 include(FetchContent)
@@ -12,8 +13,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(ftxui)
 
-# Define your executable
-add_executable(gak src/css/test.cpp)
+add_executable(gak src/main.cpp)
 
 set_target_properties(gak PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
@@ -22,6 +22,18 @@ set_target_properties(gak PROPERTIES
 target_sources(gak PRIVATE
     src/css/lexer.cpp
     src/css/parser.cpp
+    src/renderer/dom_node.cpp
+    src/renderer/dom_node.h
+    src/renderer/html_parser.cpp
+    src/renderer/html_parser.h
+    src/renderer/renderer.cpp
+    src/renderer/renderer.h
+)
+
+target_include_directories(gak PRIVATE 
+    src
+    src/renderer
+    src/css
 )
 
 # Link the required FTXUI libraries
