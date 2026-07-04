@@ -15,6 +15,10 @@ FetchContent_MakeAvailable(ftxui)
 # Define your executable
 add_executable(gak src/css/test.cpp)
 
+set_target_properties(gak PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 target_sources(gak PRIVATE
     src/css/lexer.cpp
     src/css/parser.cpp
