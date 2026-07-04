@@ -13,7 +13,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(ftxui)
 
 # Define your executable
-add_executable(gak src/renderer/main.cpp)
+add_executable(gak src/css/test.cpp)
+
+target_sources(gak PRIVATE
+    src/css/lexer.cpp
+    src/css/parser.cpp
+)
 
 # Link the required FTXUI libraries
 target_link_libraries(gak PRIVATE 
