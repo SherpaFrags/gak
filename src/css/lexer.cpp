@@ -49,7 +49,8 @@ public:
 
     if (nextTokenType.has_value()) {
       Token token;
-      if (*nextTokenType == TokenType::DeclValue) {
+      // something like "10px" -> needs number val + unit. otherwise just text
+      if (*nextTokenType == TokenType::DeclValue && isdigit(character)) {
         token = nextNumberValue();
         nextTokenType = TokenType::DeclUnit;
       } else {
