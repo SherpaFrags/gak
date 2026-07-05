@@ -3,6 +3,9 @@ project(gak CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+find_package(OpenSSL REQUIRED)
 
 # Automatically download FTXUI from GitHub
 include(FetchContent)
@@ -14,6 +17,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(ftxui)
 
 add_executable(gak src/main.cpp)
+
+target_include_directories(gak PRIVATE include)
+target_compile_definitions(gak PRIVATE CPPHTTPLIB_OPENSSL_SUPPORT)
+target_link_libraries(gak PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 
 set_target_properties(gak PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
